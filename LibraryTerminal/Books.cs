@@ -23,20 +23,32 @@ namespace LibraryTerminal
 
         }
 
-        public static void CheckOut()
+        public  void CheckOut()
         {
+            if (this.Status==true)
+            {
+                Console.WriteLine("This book is on the shelf");
 
+                DateTime currentDate = DateTime.Now;
+                DateTime dueDate = currentDate.AddDays(14);
+                this.DueDate = DateToString(dueDate);
+
+            }
+            else
+            {
+                Console.WriteLine("I'm sorry this book is currently checked out");
+            }
         }
 
 
-        public static string DateToString(DateTime dateTime)
+        public string DateToString(DateTime dateTime)
         {
             string dateTimeString = dateTime.ToString();
             return dateTimeString;
 
         }
 
-        public static DateTime StringtoDate(string dateTimeString)
+        public  DateTime StringtoDate(string dateTimeString)
         {
             DateTime datetime = DateTime.Parse(dateTimeString);
             return datetime;
