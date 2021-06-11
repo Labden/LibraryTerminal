@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Linq;
 
 namespace LibraryTerminal
 {
      public class Library
     {
         public List<Books> BookList { get; set; } = new List<Books>();
-
+        public string Return { get; set; } = "Your book has been returned!";
         public Library()
         {
             BookList.Add(new Books("Game of Thrones","George R.R Martin", true, null));        //index 0
@@ -23,17 +24,60 @@ namespace LibraryTerminal
             BookList.Add(new Books("Marcus Aurelius: Meditations", "Penguin Classics", true, null)); //index 9
             BookList.Add(new Books("Clean Code", "Robert Cecil Martin", true, null));          //index 10
             BookList.Add(new Books("Where the sidewalk ends", "Shel Silversteins", true, null)); //index 11
-            BookList.Add(new Books("Alice in Wonderland", "Charles Dodgson", true, null));     //index 12 
+            BookList.Add(new Books("Alice in Wonderland", "Charles Dodgson", true, null));     //index 12
+        }
+        public void ReturnBook()
+        {
+            if (true)
+            {
+                Console.WriteLine("Would you like to return a book? (y/n)");
+                string answer = Console.ReadLine().ToUpper();
+
+                if (answer == "Y" || answer == "YES")
+                {
+                    Console.WriteLine(Return);
+                }
+                else if (answer == "N" || answer == "NO")
+                {
+                    Console.WriteLine("Okay!");
+                }
+            }
         }
 
-        public void SearchbyTitleOrAuthor(string keyword)
+
+
+        public void SearchbyAuthor( string keyword)
         {
 
-            //var byAuthor = Booklist.Where(Book => Book.Author.Contains(keyword) || Book.Title.Contains(keyword));
-            //Console.WriteLine(byAuthor);
 
+
+            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower()));
+
+       
+            foreach (Books book in byAuthor)
+            {
+                Console.WriteLine($"{book.Title} -- {book.Author}");
+            }
 
         }
+
+        public void SearchbyTitle(string keyword)
+        {
+
+
+
+            var byTitle = this.BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()) );
+
+
+            foreach (Books book in byTitle)
+            {
+                Console.WriteLine($"{book.Title} + {book.Author}");
+            }
+
+        }
+
+
+
 
     }
 }
