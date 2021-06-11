@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace LibraryTerminal
 {
@@ -6,6 +7,16 @@ namespace LibraryTerminal
     {
         static void Main(string[] args)
         {
+            Library library = new Library();
+            /*
+            foreach (Books b in library.BookList) 
+            {
+                Console.WriteLine(b.Status);
+            }
+            */
+
+            PrintWholeList(library.BookList);
+
             bool goOn = true;
             while (goOn == true)
             {
@@ -17,11 +28,11 @@ namespace LibraryTerminal
 
         }
 
-        public static void PrintWholeList(List<string> items)
+        public static void PrintWholeList(List<Books> items)
         {
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine($"{i + 1}: {items[i]}");
+                Console.WriteLine($"{i + 1}: {items[i].Title}, -- {items[i].Author}" );
             }
         }
 
@@ -54,9 +65,9 @@ namespace LibraryTerminal
 
             }
         }
-        public static bool IsValidIndex(int collectionLength, int index)
+        public static bool IsValidIndex(List<Books> booklist, int index)
         {
-            if (index >= 0 && index < collectionLength)
+            if (index >= 0 && index < booklist.Count)
             {
                 return true;
             }

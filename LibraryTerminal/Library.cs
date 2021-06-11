@@ -4,7 +4,7 @@ using System.Text;
 
 namespace LibraryTerminal
 {
-    class Library
+     public class Library
     {
         public List<Books> BookList { get; set; } = new List<Books>();
 
