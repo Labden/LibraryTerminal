@@ -25,10 +25,18 @@ namespace LibraryTerminal
         }
 
 
-        public void SearchbyTitleOrAuthor(List<Books> booklist,string keyword)
+        public void SearchbyAuthor(List<Books> booklist,string keyword)
         {
 
+         
+          
            var byTitleAuthor = booklist.Where(Book => Book.Author.Contains(keyword)|| Book.Title.Contains(keyword));
+
+            Console.WriteLine(byTitleAuthor);
+            foreach (Books book in byTitleAuthor)
+            {
+                Console.WriteLine(book.Title+book.Author);
+            }
 
         }
 
