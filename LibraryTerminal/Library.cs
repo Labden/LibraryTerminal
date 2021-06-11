@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryTerminal
@@ -24,5 +25,15 @@ namespace LibraryTerminal
             BookList.Add(new Books("Where the sidewalk ends", "Shel Silversteins", true, null)); //index 11
             BookList.Add(new Books("Alice in Wonderland", "Charles Dodgson", true, null));     //index 12 
         }
+
+        public void SearchbyTitleOrAuthor(string keyword)
+        {
+
+            //var byAuthor = Booklist.Where(Book => Book.Author.Contains(keyword) || Book.Title.Contains(keyword));
+            //Console.WriteLine(byAuthor);
+
+
+        }
+
     }
 }
