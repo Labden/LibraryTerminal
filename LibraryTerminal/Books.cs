@@ -66,12 +66,6 @@ namespace LibraryTerminal
             DateTime datetime = DateTime.Parse(dateTimeString);
             return datetime;
         }
-
-
-
-
-
-
     }
 }
     
