@@ -22,5 +22,31 @@ namespace LibraryTerminal
             this.DueDate = DueDate;
 
         }
+
+        public static void CheckOut()
+        {
+
+        }
+
+
+        public static string DateToString(DateTime dateTime)
+        {
+            string dateTimeString = dateTime.ToString();
+            return dateTimeString;
+
+        }
+
+        public static DateTime StringtoDate(string dateTimeString)
+        {
+            DateTime datetime = DateTime.Parse(dateTimeString);
+            return datetime;
+        }
+
+
+
+
+
+
     }
 }
+    
