@@ -24,23 +24,6 @@ namespace LibraryTerminal
 
         }
 
-
-        public void SearchbyAuthor(List<Books> booklist,string keyword)
-        {
-
-         
-          
-           var byTitleAuthor = booklist.Where(Book => Book.Author.Contains(keyword)|| Book.Title.Contains(keyword));
-
-            Console.WriteLine(byTitleAuthor);
-            foreach (Books book in byTitleAuthor)
-            {
-                Console.WriteLine(book.Title+book.Author);
-            }
-
-        }
-
-
         //The checkout method is made to be called after a user has selected the book they wish the checkout
         //It then checks the books current availability status 
         public  void CheckOut()
@@ -52,6 +35,7 @@ namespace LibraryTerminal
                 //sets the dueDate 14 days ahead from the current system time
                 DateTime dueDate = DateTime.Now.AddDays(14);
                 this.DueDate = DateToString(dueDate);
+                this.Status = false;
                 Console.WriteLine($"The book is available, Please bring it back by {dueDate}");
 
             }
