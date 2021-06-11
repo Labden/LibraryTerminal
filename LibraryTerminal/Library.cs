@@ -33,7 +33,7 @@ namespace LibraryTerminal
 
 
 
-            var byAuthor = this.BookList.Where(Book => Book.Author.Contains(keyword));
+            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower()));
 
        
             foreach (Books book in byAuthor)
@@ -48,7 +48,7 @@ namespace LibraryTerminal
 
 
 
-            var byTitle = this.BookList.Where(Book => Book.Title.Contains(keyword) );
+            var byTitle = this.BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()) );
 
 
             foreach (Books book in byTitle)
