@@ -29,11 +29,28 @@ namespace LibraryTerminal
 
                 if (input == 0)
                 {
-                    
+                    PrintWholeList(library.BookList);
                 }
                 else if (input == 1)
                 {
-                    //search for title of Author
+                    Console.WriteLine("Author or Title?");
+                    string authortitle = Console.ReadLine().ToLower();
+
+                    if (authortitle == "author")
+                    {
+                        Console.WriteLine("Search by Author");
+                        string keyword = Console.ReadLine();
+                        library.SearchbyAuthor(keyword);
+                    }
+                    else if (authortitle == "title")
+                    {
+                        //search by Author
+                        Console.WriteLine("Search by Title");
+                        string keyword = Console.ReadLine();
+                        library.SearchbyTitle(keyword);
+                    }
+                    else
+                    { Console.WriteLine("Invalid Input"); }
                 }
                 else if (input == 2)
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace LibraryTerminal
 {
@@ -41,5 +42,40 @@ namespace LibraryTerminal
                 }
             }
         }
+
+
+
+        public void SearchbyAuthor( string keyword)
+        {
+
+
+
+            var byAuthor = this.BookList.Where(Book => Book.Author.Contains(keyword));
+
+       
+            foreach (Books book in byAuthor)
+            {
+                Console.WriteLine($"{book.Title} -- {book.Author}");
+            }
+
+        }
+
+        public void SearchbyTitle(string keyword)
+        {
+
+
+
+            var byTitle = this.BookList.Where(Book => Book.Title.Contains(keyword) );
+
+
+            foreach (Books book in byTitle)
+            {
+                Console.WriteLine($"{book.Title} + {book.Author}");
+            }
+
+        }
+
+
+
     }
 }
