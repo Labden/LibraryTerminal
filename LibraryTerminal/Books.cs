@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace LibraryTerminal
@@ -22,6 +23,15 @@ namespace LibraryTerminal
             this.DueDate = DueDate;
 
         }
+
+
+        public void SearchbyTitleOrAuthor(List<Books> booklist,string keyword)
+        {
+
+           var byTitleAuthor = booklist.Where(Book => Book.Author.Contains(keyword)|| Book.Title.Contains(keyword));
+
+        }
+
 
         //The checkout method is made to be called after a user has selected the book they wish the checkout
         //It then checks the books current availability status 
