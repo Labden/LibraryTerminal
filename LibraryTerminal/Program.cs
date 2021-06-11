@@ -7,26 +7,60 @@ namespace LibraryTerminal
     {
         static void Main(string[] args)
         {
-            Library library = new Library();
-            /*
-            foreach (Books b in library.BookList) 
-            {
-                Console.WriteLine(b.Status);
-            }
-            */
-
-            PrintWholeList(library.BookList);
-
             bool goOn = true;
             while (goOn == true)
             {
+                //Library object holds list of books
+                Library library = new Library();
 
+                //main menu
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Welcome to Grand Circus Library \n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("0) Display book list");
+                Console.WriteLine("1) Search by Title or Author");
+                //options will be implimented later
+                Console.WriteLine("2) Suggest a book -- does not work, will impliment later");
+                Console.WriteLine("3) Book of the Day -- does not work, will impliment later");
+                Console.WriteLine("4) Burn down the Libray...? ");
+                Console.WriteLine("5) Exit");
+                Console.WriteLine();
+                int input = GetuserInput("Please select and option");
 
-
+                if (input == 0)
+                {
+                    
+                }
+                else if (input == 1)
+                {
+                    //search for title of Author
+                }
+                else if (input == 2)
+                {
+                    //suggest a book
+                }
+                else if (input == 3)
+                {
+                    //book of the day
+                    //get book at random
+                }
+                else if (input == 4)
+                {
+                    //burndown library
+                }
+                else if (input == 5)
+                {
+                    goOn = GetContinue();
+                }
+                else
+                {
+                    GetuserInput("Please select and option");
+                }
             }
-            goOn = GetContinue();
 
         }
+
+    
 
         public static void PrintWholeList(List<Books> items)
         {
@@ -36,12 +70,21 @@ namespace LibraryTerminal
             }
         }
 
-        public static int GetuserInput(string inputType)
+        public static int GetuserInput(string message)
         {
-            int input;
-            Console.WriteLine(inputType);
-            input = int.Parse(Console.ReadLine());
-            return input;
+            Console.WriteLine(message);
+            string input = Console.ReadLine();
+            int index = int.Parse(input);
+
+            if(index >= 0 && index <= 12)
+            {
+                return index;
+            }
+            else
+            {
+                return GetuserInput("Please select and option provided");
+            }
+
         }
 
         static bool GetContinue()
