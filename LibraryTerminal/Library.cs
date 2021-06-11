@@ -10,23 +10,12 @@ namespace LibraryTerminal
 
         public Library()
         {
-            List<string> shrekScenes = new List<string>() {};
-            Books.Add(new Books());
-
-            List<string> silentHillScenes = new List<string>() {};
-            Books.Add(new Books());
-
-            List<string> theNotebookScenes = new List<string>() {};
-            Books.Add(new Books());
-
-            List<string> pulpFictionScenes = new List<string>() {};
-            Books.Add(new Books());
-
-            List<string> fightClubScenes = new List<string>() {};
-            Books.Add(new Books());
-
-            List<string> pineappleExpressScenes = new List<string>() {};
-            Books.Add(new Books());
+            Books.Add(new Books("Game of Thrones","George R.R Martin", true, null));        //index 0
+            Books.Add(new Books("On the road", "Jack Kerouac", true, null));                //index 1
+            Books.Add(new Books("Green eggs an ham", "Dr.Seuess", true, null));             //index 2
+            Books.Add(new Books("The Art of War", "Sun Tzu", true, null));                  //index 3
+            Books.Add(new Books("C#: Beginners guide to OOP", "Grand Circus", true, null)); //index 4
+            Books.Add(new Books("The little engine that could", "Watty Piper", true, null));//index 5
         }
     }
 }
