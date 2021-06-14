@@ -10,15 +10,16 @@ namespace LibraryTerminal
     {
         static void Main(string[] args)
         {
-
-            string filePath = @"BooksList.txt";
+            //C:\Users\tmviz\source\repos\LIbraryTerminal\LibraryTerminal\LibraryTerminal
+            //C:\Users\tmviz\source\repos\LIbraryTerminal\LibraryTerminal\LibraryTerminal\LibraryTerminal\bin\Debug\netcoreapp3.1\.exe
+            string filePath = @"..\..\..\BooksList.txt";
             StreamReader reader = new StreamReader(filePath);
 
             string output = reader.ReadToEnd();
 
             string[] lines = output.Split('\n');
 
-            List<Books> BookList = new List<Books>();
+            List<Books> bookList = new List<Books>();
 
             reader.Close();
 
@@ -28,7 +29,7 @@ namespace LibraryTerminal
                 Books b = LIbraryIO.ConvertToBooks(line);
                 if (b != null)
                 {
-                    BookList.Add(b);
+                    bookList.Add(b);
                 }
             }
 
@@ -38,7 +39,7 @@ namespace LibraryTerminal
                 while (goOn == true)
                 {
                     //Library object pulls
-                    LIbraryIO libraryIO = new LIbraryIO(BookList);
+                    LIbraryIO libraryIO = new LIbraryIO(bookList);
 
                     //main menu
                     Console.ForegroundColor = ConsoleColor.Cyan;
