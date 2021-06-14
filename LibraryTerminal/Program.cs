@@ -109,46 +109,70 @@ namespace LibraryTerminal
                         Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("--Search by Title--");
                         Console.ForegroundColor = ConsoleColor.White;
-                        Console.WriteLine("Please enter a book title you want to search for.");
+                        Console.WriteLine("Please enter a key word you want to search for.");
 
                         string keyword = Console.ReadLine().ToLower().Trim();
                         libraryIO.SearchbyTitle(keyword);
-                        Console.ReadLine();
-                        optionTwo = false;
 
-                        /*
+                        
                         Console.WriteLine("Would you like to check out this selected book? (y/n)");
                         string userAnswer = Console.ReadLine().ToLower().Trim();
                         if (userAnswer == "y" || userAnswer == "yes")
                         {
-                            libraryIO.CheckOut();
+                            Console.WriteLine("These books match your search, which one would you like to select?");
+                            int input2 = int.Parse(Console.ReadLine());
+
+                            libraryIO.CheckOut(input2);
                             Console.WriteLine("Thank you, enjoy your book");
                             optionTwo = false;
                             Console.ReadLine();
                             Console.Clear();
                         }
-                        */
+                        
                     }
 
 
                 }
                 else if (input == 3)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("--Search by Author--");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("Please eneter a book author you want to search for.");
-                    
-                    string keyword = Console.ReadLine().ToLower().Trim();
-                    libraryIO.SearchbyAuthor(keyword);
-                    Console.ReadLine();
+                    bool optionTwo = true;
+                    while (optionTwo == true)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("--Search by Author--");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Please enter a key word you want to search for.");
 
-                    //ask if they want to check out the book they have searched for
+                        string keyword = Console.ReadLine().ToLower().Trim();
+                        libraryIO.SearchbyTitle(keyword);
+
+
+                        Console.WriteLine("Would you like to check out this selected book? (y/n)");
+                        string userAnswer = Console.ReadLine().ToLower().Trim();
+                        if (userAnswer == "y" || userAnswer == "yes")
+                        {
+                            Console.WriteLine("These books match your search, which one would you like to select?");
+                            int input2 = int.Parse(Console.ReadLine());
+
+                            libraryIO.CheckOut(input2);
+                            Console.WriteLine("Thank you, enjoy your book");
+                            optionTwo = false;
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+
+                    }
+
+
                 }
                 else if (input == 4)
                 {
                     //add book to list and txt file
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("--Add a book to the list");
+                    Console.ForegroundColor = ConsoleColor.White;
                     libraryIO.AddBook();
                 }
                 else if (input == 5)
