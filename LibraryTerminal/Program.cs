@@ -127,6 +127,43 @@ namespace LibraryTerminal
                 {
                     //call reutnr book funtion here
                     //add data validation?
+
+                    bool optionOne = true;
+                    while (optionOne == true)
+                    {
+                        //display book list txt file
+                        libraryIO.PrintWholeList();
+                        Console.Write("Would you like to return a book from this this? (y/n): ");
+                        string userAnswer = Console.ReadLine().ToLower().Trim();
+                        if (userAnswer == "y" || userAnswer == "yes")
+                        {
+                            Console.WriteLine("Please select a book using its index");
+                            try
+                            {
+                                int bookselected = int.Parse(Console.ReadLine());
+                                libraryIO.ReturnBook(bookselected);
+                                Console.WriteLine("Thank you, enjoy your book");
+                                optionOne = false;
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("I didn't understand what book you wanted to check out");
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                Console.WriteLine("That index is out of range");
+                            }
+                        }
+                        else if (userAnswer == "n" || userAnswer == "no")
+                        {
+                            Console.WriteLine("Moving back to main menu");
+                            Console.ReadLine();
+                            Console.Clear();
+                            optionOne = false;
+                        }
+                    }
                 }
 
                 else if (input == 6)

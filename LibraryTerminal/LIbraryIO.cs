@@ -174,6 +174,53 @@ namespace LibraryTerminal
 
         }
 
+        public void ReturnBook(int index)
+        {
+            Books chosenbook = BookList[index - 1];
+
+            if (chosenbook.Status != true)
+            {
+                //sets the dueDate 14 days ahead from the current system time
+                DateTime dueDate = DateTime.Now.AddDays(14);
+                chosenbook.DueDate = null;
+                Console.WriteLine($"You have returned {chosenbook.Title}, by {chosenbook.Author} Thank You!");
+                chosenbook.Status = true;
+
+                //takes updated b and turns it to a string.
+                string newline = LIbraryIO.BooksToString(chosenbook);
+
+                //Repulls the whole list from the text file into program
+
+                string filePath = @"..\..\..\BooksList.txt";
+                StreamReader reader = new StreamReader(filePath);
+
+                string output = reader.ReadToEnd();
+
+                string[] lines = output.Split('\n');
+
+                reader.Close();
+
+                //This sets the location of the chosen array to be equal to the new status converted string
+                lines[index - 1] = newline;
+
+                string newupdatedstatuslist = string.Join("\n", lines);
+
+
+                StreamWriter writer = new StreamWriter(filePath);
+                //Write override everything with the string
+                writer.Write(newupdatedstatuslist);
+
+                writer.Close();
+
+            }
+            else
+            {
+                Console.WriteLine($"{chosenbook.Title}, by {chosenbook.Author} is currently on file and doesn't need to be returned");
+            }
+
+
+        }
+
 
 
         //this will search the book list for an author and check to see if that author is in the book list
