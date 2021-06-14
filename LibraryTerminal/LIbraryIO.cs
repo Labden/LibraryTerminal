@@ -24,11 +24,11 @@ namespace LibraryTerminal
 
         public void SearchbyAuthor(string keyword)
         {
-            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower())).ToList(); ;
+            var byAuthor = BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower())).ToList(); ;
 
             for(int i = 0; i < byAuthor.Count; i++)
             {
-                Console.WriteLine($"{i}: {byAuthor[i].Title} by {byAuthor[i].Author}");
+                Console.WriteLine($"{i + 1}: {byAuthor[i].Title} by {byAuthor[i].Author}");
             }
         }
 
@@ -40,7 +40,7 @@ namespace LibraryTerminal
 
                 for(int i = 0; i < byTitle.Count; i++)
                 {
-                    Console.WriteLine($"{i}: {byTitle[i].Title} by {byTitle[i].Author}");
+                    Console.WriteLine($"{i + 1}: {byTitle[i].Title} by {byTitle[i].Author}");
 
                 }
 

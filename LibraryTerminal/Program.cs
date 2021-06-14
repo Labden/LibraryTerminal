@@ -112,21 +112,27 @@ namespace LibraryTerminal
                         Console.WriteLine("Please enter a key word you want to search for.");
 
                         string keyword = Console.ReadLine().ToLower().Trim();
+                        Console.WriteLine("These books match your search results:");
                         libraryIO.SearchbyTitle(keyword);
 
-                        
-                        Console.WriteLine("Would you like to check out this selected book? (y/n)");
+                        Console.WriteLine("Would you like to check out a book from th list? (y/n)");
                         string userAnswer = Console.ReadLine().ToLower().Trim();
                         if (userAnswer == "y" || userAnswer == "yes")
                         {
-                            Console.WriteLine("These books match your search, which one would you like to select?");
-                            int input2 = int.Parse(Console.ReadLine());
+                            Console.WriteLine("Please select the index of the book you'd like.");
+                            try
+                            {
+                                int input2 = int.Parse(Console.ReadLine());
+                                libraryIO.CheckOut(input2);
+                                optionTwo = false;
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                            catch (FormatException)
+                            {
 
-                            libraryIO.CheckOut(input2);
-                            Console.WriteLine("Thank you, enjoy your book");
-                            optionTwo = false;
-                            Console.ReadLine();
-                            Console.Clear();
+                                throw;
+                            }
                         }
                         
                     }
