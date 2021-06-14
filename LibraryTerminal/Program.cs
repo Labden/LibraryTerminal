@@ -101,6 +101,7 @@ namespace LibraryTerminal
                 else if (input == 2)
 
                 {
+
                     bool optionTwo = true;
                     while (optionTwo == true)
                     {
@@ -129,6 +130,7 @@ namespace LibraryTerminal
                         */
                     }
 
+
                 }
                 else if (input == 3)
                 {
@@ -149,15 +151,54 @@ namespace LibraryTerminal
                     //add book to list and txt file
                     libraryIO.AddBook();
                 }
-                else if( input == 5)
+                else if (input == 5)
                 {
                     //call reutnr book funtion here
                     //add data validation?
+
+                    bool optionOne = true;
+                    while (optionOne == true)
+                    {
+                        //display book list txt file
+                        libraryIO.PrintWholeList();
+                        Console.Write("Would you like to return a book from this this? (y/n): ");
+                        string userAnswer = Console.ReadLine().ToLower().Trim();
+                        if (userAnswer == "y" || userAnswer == "yes")
+                        {
+                            Console.WriteLine("Please select a book using its index");
+                            try
+                            {
+                                int bookselected = int.Parse(Console.ReadLine());
+                                libraryIO.ReturnBook(bookselected);
+                                Console.WriteLine("Thank you, enjoy your book");
+                                optionOne = false;
+                                Console.ReadLine();
+                                Console.Clear();
+                            }
+                            catch (FormatException)
+                            {
+                                Console.WriteLine("I didn't understand what book you wanted to check out");
+                            }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                Console.WriteLine("That index is out of range");
+                            }
+                        }
+                        else if (userAnswer == "n" || userAnswer == "no")
+                        {
+                            Console.WriteLine("Moving back to main menu");
+                            Console.ReadLine();
+                            Console.Clear();
+                            optionOne = false;
+                        }
+                    }
                 }
 
                 else if (input == 6)
 
                 {
+                    Books bookOfTheDay = BookOfTheDay(BookList);
+                    Console.WriteLine($"{bookOfTheDay.Title} by {bookOfTheDay.Author}");
 
                     //book of the day
                     //get book at random
@@ -188,11 +229,11 @@ namespace LibraryTerminal
         {
             Console.Write(message + " ");
             string input = Console.ReadLine().ToLower().Trim();
-            try 
+            try
             {
                 int index = int.Parse(input);
 
-                if(index >= 1 && index <= BookLists.Count)
+                if (index >= 1 && index <= BookLists.Count)
 
                 {
                     return index;
@@ -251,9 +292,9 @@ namespace LibraryTerminal
 
             Console.WriteLine("Are you sure? (y/n)");
             string input = Console.ReadLine().ToLower().Trim(); ;
-            if(input == "y" || input == "yes")
+            if (input == "y" || input == "yes")
             {
-                for(int i = 0; i <= 100; i++)
+                for (int i = 0; i <= 100; i++)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("BURNING BOOKS");
@@ -266,7 +307,7 @@ namespace LibraryTerminal
                 Console.ReadLine().ToLower().Trim();
                 Console.Clear();
             }
-            else if(input == "n" || input == "no")
+            else if (input == "n" || input == "no")
             {
                 Console.WriteLine("Right, Arson is a crime.");
                 Console.WriteLine("Probably not a good idea to burn down the library...");
@@ -278,6 +319,20 @@ namespace LibraryTerminal
                 BurnLibrary();
             }
         }
+        public static Books BookOfTheDay(List<Books> Book)
+        {
+            Random random = new Random();
+
+            int randomBook = random.Next(1, Book.Count + 1);
+            for (int i = 1; i < Book.Count; i++)
+            {
+                if (randomBook == i)
+                {
+                    return Book[i];
+                }
+            }
+            return null;
+        }
     }
-    }
+}
 
