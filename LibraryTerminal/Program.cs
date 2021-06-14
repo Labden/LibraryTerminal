@@ -52,18 +52,18 @@ namespace LibraryTerminal
                     Console.WriteLine("4) Add Book to the Library"); //exceptions need to be added and tested  
                     Console.WriteLine("5) Book of the Day -- does not work, will impliment later");
                     Console.WriteLine("6) Burn down the Library...? "); //functionality to be added in later
-                    Console.WriteLine("7) Add Book to the Library"); //exceptions need to be added and tested
-                    Console.WriteLine("8) Checkout Book from Library"); //excpetions need to be added and tested
+                    Console.WriteLine("7) Checkout Book from Library"); //exceptions need to be added and tested
+                    //Console.WriteLine("8) Checkout Book from Library"); //excpetions need to be added and tested
                     Console.WriteLine("9) Exit");
                     Console.WriteLine();
-                    int input = GetuserInput("Please select and option");
+                    int input = int.Parse(GetuserInput("Please select and option"));
 
                 if (input == 1)
                 {
                     libraryIO.PrintWholeList();
 
                 }
-                   else if (input == "2")
+                   else if (input == 2)
                 {
 
                         Console.WriteLine("Search by Title");
@@ -74,7 +74,7 @@ namespace LibraryTerminal
                     //get book at random from list and ask user to check it out
 
                 }
-                else if (input == "3")
+                else if (input == 3)
                 {
 
                         Console.WriteLine("Search by Author");
@@ -90,7 +90,7 @@ namespace LibraryTerminal
                         libraryIO.AddBook();
                     }
 
-                else if (input == "6")
+                else if (input == 6)
                 {
 
                        
@@ -100,14 +100,14 @@ namespace LibraryTerminal
                     Console.Clear();
 
                 }
-                else if (input == "5")
+                else if (input == 5)
                 {
 
                         //book of the day
                         //get book at random
                     }
 
-                    else if (input == 8)
+                    else if (input == 7)
                     {
                         Console.WriteLine("Select a book by index number");
                         int bookselected = int.Parse(Console.ReadLine());
@@ -122,52 +122,44 @@ namespace LibraryTerminal
                         GetuserInput("Please select an option");
                     }
                 }
-
-            
-
-                    displayMenu = GetContinue();
-                }
-                else
-                {
-                    GetuserInput("Please select and option");
-                }
             }
-        }
-        public static void TitleOrAuthor(Library library)
-        {
-            Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.WriteLine("--Searching by Author or Title--");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("Would you like to search by author or title: ");
+        
+        //public static void TitleOrAuthor(Library library)
+        //{
+        //    Console.ForegroundColor = ConsoleColor.Cyan;
+        //    Console.WriteLine("--Searching by Author or Title--");
+        //    Console.ForegroundColor = ConsoleColor.White;
+        //    Console.Write("Would you like to search by author or title: ");
 
-            string authortitle = Console.ReadLine().ToLower();
-            if (authortitle == "author")
-            {
-                //search by author
-                Console.WriteLine("Searching by Author");
-                string keyword = Console.ReadLine();
-                library.SearchbyAuthor(keyword);
+        //    string authortitle = Console.ReadLine().ToLower();
+        //    if (authortitle == "author")
+        //    {
+        //        //search by author
+        //        Console.WriteLine("Searching by Author");
+        //        string keyword = Console.ReadLine();
+        //        library.SearchbyAuthor(keyword);
 
-                //add method here
-                //need to ask if they want to check this book out
-            }
-            else if (authortitle == "title")
-            {
-                //search by title
-                Console.WriteLine("Searching by Title");
-                string keyword = Console.ReadLine();
-                library.SearchbyTitle(keyword);
+        //        //add method here
+        //        //need to ask if they want to check this book out
+        //    }
+        //    else if (authortitle == "title")
+        //    {
+        //        //search by title
+        //        Console.WriteLine("Searching by Title");
+        //        string keyword = Console.ReadLine();
+        //        library.SearchbyTitle(keyword);
 
-                //add method here
-                //need to ask if they want to check this book out
-            }
-            else
-            { 
-                Console.WriteLine("Invalid Input");
-                TitleOrAuthor(library);
-            }
+        //        //add method here
+        //        //need to ask if they want to check this book out
+        //    }
+        //    else
+        //    { 
+        //        Console.WriteLine("Invalid Input");
+        //        TitleOrAuthor(library);
+        //    }
 
-        }
+        //}
+       
 
         public static void PrintWholeList(List<Books> items)
         {
@@ -284,4 +276,5 @@ namespace LibraryTerminal
             }
         }
     }
-}
+    }
+
