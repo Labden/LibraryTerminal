@@ -18,7 +18,7 @@ namespace LibraryTerminal
 
             string[] lines = output.Split('\n');
 
-            List<Books> bookList = new List<Books>();
+            List<Books> BookList = new List<Books>();
 
             reader.Close();
 
@@ -28,7 +28,7 @@ namespace LibraryTerminal
                 Books b = LIbraryIO.ConvertToBooks(line);
                 if (b != null)
                 {
-                    bookList.Add(b);
+                    BookList.Add(b);
                 }
             }
 
@@ -53,12 +53,12 @@ namespace LibraryTerminal
                 Console.WriteLine("6) Burn down the Library...? "); //functionality to be added in later
                 Console.WriteLine("7) Exit");
                 Console.WriteLine();
-                int input = GetuserInput("Please select and option");
+                int input = GetuserInput(BookList, "Please select and option");
 
                 if (input == 1)
                 {
+                        libraryIO.PrintWholeList();
                     //display book list txt file
-                    libraryIO.PrintWholeList();
                     //ask user to check out a book from the list
                     //call checkout?
 
@@ -117,13 +117,12 @@ namespace LibraryTerminal
 
                 else if (input == 7)
                 {
-                    //ADD DATA VALIDATION!!
-                    //Exit program
+
                     goOn = GetContinue();
                 }
                 else
                 {
-                    GetuserInput("Please select an option");
+                    GetuserInput(BookList, "Please select an option");
                 }
 
             }
@@ -178,23 +177,23 @@ namespace LibraryTerminal
             }
         }
 
-        public static int GetuserInput(string message)
+        public static int GetuserInput(List<Books> BookLists, string message)
         {
             Console.Write(message + " ");
             string input = Console.ReadLine().ToLower().Trim();
             try 
             {
                 int index = int.Parse(input);
-                if(index >= 0 && index <= 12)
+                if(index >= 0 && index <= BookLists.Count)
                 {
                     return index;
                 }
             }
             catch (FormatException)
             {
-                return GetuserInput("Please select a valid option");
+                return GetuserInput(BookLists, "I'm sorry, that wasn't a valid input. Please select a valid option");
             }
-            return GetuserInput("Please select a valid index");
+            return GetuserInput(BookLists, "I'm sorry, that wasn't a valid input. Please select a valid index");
 
         }
 
@@ -253,7 +252,7 @@ namespace LibraryTerminal
                     Console.WriteLine("BURNING BOOKS");
                 }
                 Console.WriteLine("Burning Complete...");
-                Console.ReadLine();
+                Console.ReadLine().ToLower().Trim();
                 Console.Clear();
             }
             else if(input == "n" || input == "no")
