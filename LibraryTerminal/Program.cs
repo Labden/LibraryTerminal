@@ -39,7 +39,7 @@ namespace LibraryTerminal
             while (goOn == true)
             {
                 //Library object pulls
-                LIbraryIO libraryIO = new LIbraryIO(BookList);
+                LIbraryIO libraryIO = new LIbraryIO(bookList);
 
                 //main menu
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -62,14 +62,9 @@ namespace LibraryTerminal
                     //ask user to check out a book from the list
                     //call checkout?
 
-                    /*
-                     * 
-                     *     
-                          Console.WriteLine("Select a book by index number");
-                    int bookselected = int.Parse(Console.ReadLine());
-                    libraryIO.CheckOut(libraryIO.BookList[bookselected - 1]);
-                     * 
-                     */
+                    libraryIO.CheckOut();
+
+
 
                 }
 
@@ -143,7 +138,7 @@ namespace LibraryTerminal
                 //search by author
                 Console.WriteLine("Searching by Author");
                 string keyword = Console.ReadLine();
-                //LIbraryIO.SearchbyAuthor(keyword);
+                library.SearchbyAuthor(keyword);
 
                 //add method here
                 //need to ask if they want to check this book out
@@ -153,7 +148,7 @@ namespace LibraryTerminal
                 //search by title
                 Console.WriteLine("Searching by Title");
                 string keyword = Console.ReadLine();
-                //library.SearchbyTitle(keyword);
+                library.SearchbyTitle(keyword);
 
                 //add method here
                 //need to ask if they want to check this book out
