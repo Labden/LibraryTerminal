@@ -78,7 +78,7 @@ namespace LibraryTerminal
                 writer.Close();
             }
 
-            public string BooksToString(Books b)
+            public static string BooksToString(Books b)
             {
                 string output = $"{b.Title}, {b.Author}, {b.Status},{b.DueDate} \n";
                 return output;
@@ -128,19 +128,51 @@ namespace LibraryTerminal
         }
 
         //uses current day and sets that date to the book property DueDate and sets a return by time
-        public void CheckOut(Books b)
+        public void CheckOut()
         {
-            if (b.Status == true)
+
+            int index = Program.GetuserInput("Select a book by index number");
+
+            Books chosenbook = BookList[index - 1];
+
+            if (chosenbook.Status == true)
             {
                 //sets the dueDate 14 days ahead from the current system time
                 DateTime dueDate = DateTime.Now.AddDays(14);
-                b.DueDate = b.DateToString(dueDate);
-                Console.WriteLine($"You have checked out {b.Title}, by {b.Author} Please bring it back by {dueDate}");
-                b.Status = false;
+                chosenbook.DueDate = chosenbook.DateToString(dueDate);
+                Console.WriteLine($"You have checked out {chosenbook.Title}, by {chosenbook.Author} Please bring it back by {dueDate}");
+                chosenbook.Status = false;
+
+                //takes updated b and turns it to a string.
+                string newline = LIbraryIO.BooksToString(chosenbook);
+
+                //Repulls the whole list from the text file into program
+
+                string filePath = @"..\..\..\BooksList.txt";
+                StreamReader reader = new StreamReader(filePath);
+
+                string output = reader.ReadToEnd();
+
+                string[] lines = output.Split('\n');
+
+                reader.Close();
+
+                //This sets the location of the chosen array to be equal to the new status converted string
+                lines[index - 1] = newline;
+
+                string newupdatedstatuslist = string.Join("\n", lines);
+
+
+                StreamWriter writer = new StreamWriter(filePath);
+                //Write override everything with the string
+                writer.Write(newupdatedstatuslist);
+
+                writer.Close();
+                
             }
             else
             {
-                Console.WriteLine($"{b.Title}, by {b.Author} is currently checked out, its due back by the {b.DueDate}");
+                Console.WriteLine($"{chosenbook.Title}, by {chosenbook.Author} is currently checked out, its due back by the {chosenbook.DueDate}");
             }
 
 

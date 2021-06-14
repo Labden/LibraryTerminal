@@ -39,7 +39,7 @@ namespace LibraryTerminal
             while (goOn == true)
             {
                 //Library object pulls
-                LIbraryIO libraryIO = new LIbraryIO(BookList);
+                LIbraryIO libraryIO = new LIbraryIO(bookList);
 
                 //main menu
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -57,6 +57,7 @@ namespace LibraryTerminal
 
                 if (input == 1)
                 {
+
 
                     bool optionOne = true;
                     while (optionOne == true)
@@ -94,6 +95,7 @@ namespace LibraryTerminal
                             optionOne = false;
                         }
                     }
+
 
                 }
 
@@ -150,6 +152,7 @@ namespace LibraryTerminal
 
             }
         }
+
 
 
         public static int GetuserInput(List<Books> BookLists, string message)
