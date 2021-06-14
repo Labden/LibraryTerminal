@@ -7,108 +7,101 @@ namespace LibraryTerminal
     {
         static void Main(string[] args)
         {
-            //Library library = new Library();
-
-            //Books b1 = new Books("title", "author", true, null);
-            //b1.CheckOut();
-            //b1.CheckOut();
-
-            //library.SearchbyTitleOrAuthor(library.BookList, "Jack Kerouac");
-
-
-
-
-           
-            bool goOn = true;
-            while (goOn == true)
+            bool displayMenu = true;
+            while (displayMenu == true)
             {
                 //Library object holds list of books
                 Library library = new Library();
 
-                //main menu
+                //main menu -- Header
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Welcome to Grand Circus Library \n");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("0) Display book list");
-                Console.WriteLine("1) Search by Title or Author");
-                //options will be implimented later
-                Console.WriteLine("2) Suggest a book -- does not work, will impliment later");
-                Console.WriteLine("3) Book of the Day -- does not work, will impliment later");
-                Console.WriteLine("4) Burn down the Libray...? ");
-                Console.WriteLine("5) Exit");
+
+                //user options
+                Console.WriteLine("1) Display book list");
+                Console.WriteLine("2) Search by Title or Author");
+                Console.WriteLine("3) Suggest a book -- does not work, will impliment later");
+                Console.WriteLine("4) Book of the Day -- does not work, will impliment later");
+                Console.WriteLine("5) Burn down the Libray...? ");
+                Console.WriteLine("6) Exit");
                 Console.WriteLine();
-                string input = GetuserInput("Please select and option : ");
+                string input = GetuserInput("Please select an option : ");
 
-                if (input == "0")
+                //call method based on user input
+                if (input == "1")
                 {
+                    Console.Clear();
                     PrintWholeList(library.BookList);
-
-                }
-                else if (input == "1")
-                {
-
-                    Console.WriteLine("Author or Title?");
-                    string authortitle = Console.ReadLine().ToLower();
-
-                    if (authortitle == "author")
-                    {
-                        Console.WriteLine("Search by Author");
-                        string keyword = Console.ReadLine();
-                        library.SearchbyAuthor(keyword);
-                    }
-                    else if (authortitle == "title")
-                    {
-                        //search by Author
-                        Console.WriteLine("Search by Title");
-                        string keyword = Console.ReadLine();
-                        library.SearchbyTitle(keyword);
-                    }
-                    else
-                    { Console.WriteLine("Invalid Input"); }
+                    //add methof here
+                    //ask if they want to check out a book from the list
 
                 }
                 else if (input == "2")
                 {
-                    //suggest a book
+                    Console.Clear();
+                    TitleOrAuthor(library);
+                   
+
                 }
                 else if (input == "3")
                 {
-                    //book of the day
-                    //get book at random
+                    //suggest a book
+                    //write to input/output file and display the list of suggested books
                 }
                 else if (input == "4")
                 {
-                    //burndown library
+                    //book of the day
+                    //get book at random from list and ask user to check it out
                 }
                 else if (input == "5")
                 {
-                    goOn = GetContinue();
+                    //burndown library
+                    BurnLibrary();
+                    Console.Clear();
+                }
+                else if (input == "6")
+                {
+                    displayMenu = GetContinue();
                 }
                 else
                 {
                     GetuserInput("Please select and option");
                 }
             }
-
         }
-
-        public static void TitleOrAuthor()
+        public static void TitleOrAuthor(Library library)
         {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("--Searching by Author or Title--");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Would you like to search by author or title: ");
 
-            Console.WriteLine("Searching by Title or Author?");
-            string userAnswer = Console.ReadLine().ToLower().Trim();
-            if (userAnswer == "title")
-            {
-                //search by title
-            }
-            else if (userAnswer == "author")
+            string authortitle = Console.ReadLine().ToLower();
+            if (authortitle == "author")
             {
                 //search by author
-                //library.SearchbyTitleOrAuthor("input");
+                Console.WriteLine("Searching by Author");
+                string keyword = Console.ReadLine();
+                library.SearchbyAuthor(keyword);
+
+                //add method here
+                //need to ask if they want to check this book out
+            }
+            else if (authortitle == "title")
+            {
+                //search by title
+                Console.WriteLine("Searching by Title");
+                string keyword = Console.ReadLine();
+                library.SearchbyTitle(keyword);
+
+                //add method here
+                //need to ask if they want to check this book out
             }
             else
-            {
-                Console.WriteLine("Please enter a valid input");
+            { 
+                Console.WriteLine("Invalid Input");
+                TitleOrAuthor(library);
             }
 
         }
@@ -120,7 +113,7 @@ namespace LibraryTerminal
             Console.ForegroundColor = ConsoleColor.White;
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine($"{i + 1}: {items[i].Title}, --- {items[i].Author}" );
+                Console.WriteLine($"{i + 1} {items[i].Title}, by: {items[i].Author}" );
             }
         }
 
@@ -164,6 +157,7 @@ namespace LibraryTerminal
 
             if (answer == "Y" || answer == "YES")
             {
+                Console.Clear();
                 return true;
             }
             else if (answer == "N" || answer == "NO")
@@ -187,6 +181,42 @@ namespace LibraryTerminal
             else
             {
                 return false;
+            }
+        }
+
+        public static void BurnLibrary()
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("--Burn down library--");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Console.WriteLine("Are you sure? (y/n)");
+            string input = Console.ReadLine().ToLower().Trim(); ;
+            if(input == "y" || input == "yes")
+            {
+                for(int i = 0; i <= 100; i++)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("BURNING BOOKS");
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
+                    Console.WriteLine("BURNING BOOKS");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("BURNING BOOKS");
+                }
+                Console.WriteLine("Burning Complete...");
+                Console.ReadLine();
+                Console.Clear();
+            }
+            else if(input == "n" || input == "no")
+            {
+                Console.WriteLine("Right, Arson is a crime.");
+                Console.WriteLine("Probably not a good idea to burn down the library...");
+                Console.ReadLine();
+                Console.Clear();
+            }
+            else
+            {
+                BurnLibrary();
             }
         }
     }

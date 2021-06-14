@@ -30,14 +30,11 @@ namespace LibraryTerminal
         {
             if (this.Status==true)
             {
-                
-
                 //sets the dueDate 14 days ahead from the current system time
                 DateTime dueDate = DateTime.Now.AddDays(14);
                 this.DueDate = DateToString(dueDate);
                 this.Status = false;
                 Console.WriteLine($"The book is available, Please bring it back by {dueDate}");
-
             }
             else
             {
