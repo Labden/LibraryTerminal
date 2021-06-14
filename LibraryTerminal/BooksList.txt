@@ -12,4 +12,3 @@
 "Where the sidewalk ends", "Shel Silversteins", true, null
 "Alice in Wonderland", "Charles Dodgson", true, null
 
-NEw BOOK, ASDF, True, 
