@@ -35,6 +35,7 @@ namespace LibraryTerminal
 
 
             bool goOn = true;
+
             while (goOn == true)
             {
                 //Library object pulls
@@ -93,7 +94,9 @@ namespace LibraryTerminal
                         }
                     }
                 }
+
                 else if (input == 2)
+
                 {
                     
                     Console.WriteLine("Search by Title");
@@ -117,7 +120,9 @@ namespace LibraryTerminal
                     //add book to list and txt file
                     libraryIO.AddBook();
                 }
+
                 else if (input == 5)
+
                 {
 
                     //book of the day
@@ -130,6 +135,7 @@ namespace LibraryTerminal
                     Console.Clear();
 
                 }
+
                 else if (input == 7)
                 {
                     //ADD DATA VALIDATION!!
@@ -143,6 +149,7 @@ namespace LibraryTerminal
 
             }
         }
+
 
         public static int GetuserInput(List<Books> BookLists, string message)
         {
@@ -235,4 +242,5 @@ namespace LibraryTerminal
             }
         }
     }
-}
+    }
+
