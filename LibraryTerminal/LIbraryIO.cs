@@ -108,6 +108,10 @@ namespace LibraryTerminal
         //prints out a list of books from the text file by index
         public void PrintWholeList()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("--Displaying Book List--");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             for (int i = 0; i < BookList.Count; i++)
             {
