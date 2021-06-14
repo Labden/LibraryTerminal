@@ -124,10 +124,10 @@ namespace LibraryTerminal
         }
 
         //uses current day and sets that date to the book property DueDate and sets a return by time
-        public void CheckOut()
+        public void CheckOut(int index)
         {
 
-            int index = Program.GetuserInput("Select a book by index number");
+            
 
             Books chosenbook = BookList[index - 1];
 
@@ -174,18 +174,6 @@ namespace LibraryTerminal
 
         }
 
-
-
-        //this will search the book list for an author and check to see if that author is in the book list
-        public void SearchbyAuthor(List<Books> booklist, string keyword)
-        {
-            var byTitleAuthor = booklist.Where(Book => Book.Author.Contains(keyword) || Book.Title.Contains(keyword));
-            Console.WriteLine(byTitleAuthor);
-            foreach (Books book in byTitleAuthor)
-            {
-                Console.WriteLine(book.Title + book.Author);
-            }
-        }        
     }
 }
 
