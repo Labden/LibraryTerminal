@@ -178,15 +178,19 @@ namespace LibraryTerminal
         {
             Books chosenbook = BookList[index - 1];
 
+
+            
             if (chosenbook.Status != true)
             {
-                //sets the dueDate 14 days ahead from the current system time
-                DateTime dueDate = DateTime.Now.AddDays(14);
+                //sets the dueDate back to null
+                
                 chosenbook.DueDate = null;
                 Console.WriteLine($"You have returned {chosenbook.Title}, by {chosenbook.Author} Thank You!");
+
+                //this updates the bool to read as on shelf
                 chosenbook.Status = true;
 
-                //takes updated b and turns it to a string.
+                //takes updated chosenbook and turns it to a string.
                 string newline = LIbraryIO.BooksToString(chosenbook);
 
                 //Repulls the whole list from the text file into program
