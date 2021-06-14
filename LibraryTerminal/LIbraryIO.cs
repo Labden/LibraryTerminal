@@ -107,6 +107,10 @@ namespace LibraryTerminal
         //prints out a list of books from the text file by index
         public void PrintWholeList()
         {
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("--Displaying Book List--");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             for (int i = 0; i < BookList.Count; i++)
             {
@@ -124,11 +128,8 @@ namespace LibraryTerminal
         }
 
         //uses current day and sets that date to the book property DueDate and sets a return by time
-        public void CheckOut()
+        public void CheckOut(int index)
         {
-
-            int index = Program.GetuserInput("Select a book by index number");
-
             Books chosenbook = BookList[index - 1];
 
             if (chosenbook.Status == true)
