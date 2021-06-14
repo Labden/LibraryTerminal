@@ -28,22 +28,18 @@ namespace LibraryTerminal
 
                 foreach (Books book in byAuthor)
                 {
-                    Console.WriteLine($"{book.Title} -- {book.Author}");
+                    Console.WriteLine($"{book.Title} by {book.Author}");
                 }
 
             }
 
             public void SearchbyTitle(string keyword)
             {
-
-
-
-                var byTitle = this.BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()));
-
+                var byTitle = BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()));
 
                 foreach (Books book in byTitle)
                 {
-                    Console.WriteLine($"{book.Title} + {book.Author}");
+                    Console.WriteLine($"{book.Title} by {book.Author}");
                 }
 
             }
@@ -173,20 +169,7 @@ namespace LibraryTerminal
             }
 
 
-        }
-
-
-
-        //this will search the book list for an author and check to see if that author is in the book list
-        public void SearchbyAuthor(List<Books> booklist, string keyword)
-        {
-            var byTitleAuthor = booklist.Where(Book => Book.Author.Contains(keyword) || Book.Title.Contains(keyword));
-            Console.WriteLine(byTitleAuthor);
-            foreach (Books book in byTitleAuthor)
-            {
-                Console.WriteLine(book.Title + book.Author);
-            }
-        }        
+        }      
     }
 }
 
