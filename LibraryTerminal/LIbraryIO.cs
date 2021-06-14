@@ -21,31 +21,32 @@ namespace LibraryTerminal
 
 
 
+
         public void SearchbyAuthor(string keyword)
         {
-            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower()));
+            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower())).ToList(); ;
 
-            foreach (Books book in byAuthor)
+            for(int i = 0; i < byAuthor.Count; i++)
             {
-                Console.WriteLine($"{book.Title} -- {book.Author}");
+                Console.WriteLine($"{i}: {byAuthor[i].Title} by {byAuthor[i].Author}");
             }
-
         }
 
-        public void SearchbyTitle(string keyword)
-        {
 
 
-
-            var byTitle = this.BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()));
-
-
-            foreach (Books book in byTitle)
+            public void SearchbyTitle(string keyword)
             {
-                Console.WriteLine($"{book.Title} + {book.Author}");
+                var byTitle = BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower())).ToList();
+
+                for(int i = 0; i < byTitle.Count; i++)
+                {
+                    Console.WriteLine($"{i}: {byTitle[i].Title} by {byTitle[i].Author}");
+
+                }
+
             }
 
-        }
+        
 
         public void AddBook()
         {
@@ -172,6 +173,7 @@ namespace LibraryTerminal
             }
 
 
+
         }
 
         public void ReturnBook(int index)
@@ -237,5 +239,6 @@ namespace LibraryTerminal
                 Console.WriteLine(book.Title + book.Author);
             }
         }
+
     }
 }

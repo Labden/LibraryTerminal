@@ -45,7 +45,7 @@ namespace LibraryTerminal
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Welcome to Grand Circus Library \n");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("1) Display book list");
+                Console.WriteLine("1) Display book list"); // complete
                 Console.WriteLine("2) Search by Title");
                 Console.WriteLine("3) Search by Author");
                 Console.WriteLine("4) Add Book to the Library"); //exceptions need to be added and tested  
@@ -101,29 +101,81 @@ namespace LibraryTerminal
                 else if (input == 2)
 
                 {
-                    
-                    Console.WriteLine("Search by Title");
-                    string keyword = Console.ReadLine().ToLower().Trim();
-                    libraryIO.SearchbyTitle(keyword);
 
-                    //ask if they want to check out the book they have searched for
+                    bool optionTwo = true;
+                    while (optionTwo == true)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("--Search by Title--");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Please enter a key word you want to search for.");
+
+                        string keyword = Console.ReadLine().ToLower().Trim();
+                        libraryIO.SearchbyTitle(keyword);
+
+                        
+                        Console.WriteLine("Would you like to check out this selected book? (y/n)");
+                        string userAnswer = Console.ReadLine().ToLower().Trim();
+                        if (userAnswer == "y" || userAnswer == "yes")
+                        {
+                            Console.WriteLine("These books match your search, which one would you like to select?");
+                            int input2 = int.Parse(Console.ReadLine());
+
+                            libraryIO.CheckOut(input2);
+                            Console.WriteLine("Thank you, enjoy your book");
+                            optionTwo = false;
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        
+                    }
+
+
                 }
                 else if (input == 3)
                 {
-                    //ADD DATA VALIDATION!!
-                    //search list by author
-                    Console.WriteLine("Search by Author");
-                    string keyword = Console.ReadLine().ToLower().Trim();
-                    libraryIO.SearchbyAuthor(keyword);
+                    bool optionTwo = true;
+                    while (optionTwo == true)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("--Search by Author--");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Please enter a key word you want to search for.");
 
-                    //ask if they want to check out the book they have searched for
+                        string keyword = Console.ReadLine().ToLower().Trim();
+                        libraryIO.SearchbyTitle(keyword);
+
+
+                        Console.WriteLine("Would you like to check out this selected book? (y/n)");
+                        string userAnswer = Console.ReadLine().ToLower().Trim();
+                        if (userAnswer == "y" || userAnswer == "yes")
+                        {
+                            Console.WriteLine("These books match your search, which one would you like to select?");
+                            int input2 = int.Parse(Console.ReadLine());
+
+                            libraryIO.CheckOut(input2);
+                            Console.WriteLine("Thank you, enjoy your book");
+                            optionTwo = false;
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+
+                    }
+
+
                 }
                 else if (input == 4)
                 {
                     //add book to list and txt file
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("--Add a book to the list");
+                    Console.ForegroundColor = ConsoleColor.White;
                     libraryIO.AddBook();
                 }
-                else if( input == 5)
+                else if (input == 5)
                 {
                     //call reutnr book funtion here
                     //add data validation?
@@ -169,6 +221,8 @@ namespace LibraryTerminal
                 else if (input == 6)
 
                 {
+                    Books bookOfTheDay = BookOfTheDay(BookList);
+                    Console.WriteLine($"{bookOfTheDay.Title} by {bookOfTheDay.Author}");
 
                     //book of the day
                     //get book at random
@@ -199,11 +253,11 @@ namespace LibraryTerminal
         {
             Console.Write(message + " ");
             string input = Console.ReadLine().ToLower().Trim();
-            try 
+            try
             {
                 int index = int.Parse(input);
 
-                if(index >= 1 && index <= BookLists.Count)
+                if (index >= 1 && index <= BookLists.Count)
 
                 {
                     return index;
@@ -262,9 +316,9 @@ namespace LibraryTerminal
 
             Console.WriteLine("Are you sure? (y/n)");
             string input = Console.ReadLine().ToLower().Trim(); ;
-            if(input == "y" || input == "yes")
+            if (input == "y" || input == "yes")
             {
-                for(int i = 0; i <= 100; i++)
+                for (int i = 0; i <= 100; i++)
                 {
                     Console.ForegroundColor = ConsoleColor.Yellow;
                     Console.WriteLine("BURNING BOOKS");
@@ -277,7 +331,7 @@ namespace LibraryTerminal
                 Console.ReadLine().ToLower().Trim();
                 Console.Clear();
             }
-            else if(input == "n" || input == "no")
+            else if (input == "n" || input == "no")
             {
                 Console.WriteLine("Right, Arson is a crime.");
                 Console.WriteLine("Probably not a good idea to burn down the library...");
@@ -289,6 +343,20 @@ namespace LibraryTerminal
                 BurnLibrary();
             }
         }
+        public static Books BookOfTheDay(List<Books> Book)
+        {
+            Random random = new Random();
+
+            int randomBook = random.Next(1, Book.Count + 1);
+            for (int i = 1; i < Book.Count; i++)
+            {
+                if (randomBook == i)
+                {
+                    return Book[i];
+                }
+            }
+            return null;
+        }
     }
-    }
+}
 
