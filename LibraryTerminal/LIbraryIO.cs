@@ -50,7 +50,7 @@ namespace LibraryTerminal
 
             public void AddBook()
             {
-                string filePath = "BooksList.txt";
+                string filePath = @"..\..\..\BooksList.txt";
 
 
 
