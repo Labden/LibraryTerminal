@@ -18,7 +18,7 @@ namespace LibraryTerminal
 
             string[] lines = output.Split('\n');
 
-            List<Books> BookList = new List<Books>();
+            List<Books> bookList = new List<Books>();
 
             reader.Close();
 
@@ -28,13 +28,14 @@ namespace LibraryTerminal
                 Books b = LIbraryIO.ConvertToBooks(line);
                 if (b != null)
                 {
-                    BookList.Add(b);
+                    bookList.Add(b);
                 }
             }
 
 
 
             bool goOn = true;
+
             while (goOn == true)
             {
                 //Library object pulls
@@ -71,7 +72,9 @@ namespace LibraryTerminal
                      */
 
                 }
+
                 else if (input == 2)
+
                 {
                     //ADD DATA VALIDATION!!
                     //search list by title
@@ -96,7 +99,9 @@ namespace LibraryTerminal
                     //add book to list and txt file
                     libraryIO.AddBook();
                 }
+
                 else if (input == 5)
+
                 {
 
                     //book of the day
@@ -109,6 +114,7 @@ namespace LibraryTerminal
                     Console.Clear();
 
                 }
+
                 else if (input == 7)
                 {
                     //ADD DATA VALIDATION!!
@@ -159,6 +165,7 @@ namespace LibraryTerminal
             }
 
         }
+
 
         public static void PrintWholeList(List<Books> items)
         {
@@ -262,4 +269,5 @@ namespace LibraryTerminal
             }
         }
     }
-}
+    }
+

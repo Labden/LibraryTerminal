@@ -52,8 +52,7 @@ namespace LibraryTerminal
             {
                 string filePath = @"..\..\..\BooksList.txt";
 
-
-
+            //no exception testing
                 Console.WriteLine("Please input the book's Title");
                 string booktitle = Console.ReadLine();
 
