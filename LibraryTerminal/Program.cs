@@ -39,7 +39,7 @@ namespace LibraryTerminal
             while (goOn == true)
             {
                 //Library object pulls
-                LIbraryIO libraryIO = new LIbraryIO(bookList);
+                LIbraryIO libraryIO = new LIbraryIO(BookList);
 
                 //main menu
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -49,15 +49,15 @@ namespace LibraryTerminal
                 Console.WriteLine("2) Search by Title");
                 Console.WriteLine("3) Search by Author");
                 Console.WriteLine("4) Add Book to the Library"); //exceptions need to be added and tested  
-                Console.WriteLine("5) Book of the Day"); //does not work, functionality to be added later
-                Console.WriteLine("6) Burn down the Library...? "); //functionality to be added in later
-                Console.WriteLine("7) Exit");
+                Console.WriteLine("5) Return Book"); // will call return book funtion
+                Console.WriteLine("6) Book of the Day"); //does not work, functionality to be added later
+                Console.WriteLine("7) Burn down the Library...? "); //functionality to be added in later
+                Console.WriteLine("8) Exit");
                 Console.WriteLine();
                 int input = GetuserInput(BookList, "Please select and option");
 
                 if (input == 1)
                 {
-
 
                     bool optionOne = true;
                     while (optionOne == true)
@@ -72,7 +72,7 @@ namespace LibraryTerminal
                             try
                             {
                                 int bookselected = int.Parse(Console.ReadLine());
-                                libraryIO.CheckOut(libraryIO.BookList[bookselected - 1]);
+                                libraryIO.CheckOut(bookselected);
                                 Console.WriteLine("Thank you, enjoy your book");
                                 optionOne = false;
                                 Console.ReadLine();
@@ -95,7 +95,6 @@ namespace LibraryTerminal
                             optionOne = false;
                         }
                     }
-
 
                 }
 
@@ -124,15 +123,20 @@ namespace LibraryTerminal
                     //add book to list and txt file
                     libraryIO.AddBook();
                 }
+                else if( input == 5)
+                {
+                    //call reutnr book funtion here
+                    //add data validation?
+                }
 
-                else if (input == 5)
+                else if (input == 6)
 
                 {
 
                     //book of the day
                     //get book at random
                 }
-                else if (input == 6)
+                else if (input == 7)
                 {
                     //burndown library
                     BurnLibrary();
@@ -140,7 +144,7 @@ namespace LibraryTerminal
 
                 }
 
-                else if (input == 7)
+                else if (input == 8)
                 {
 
                     goOn = GetContinue();
@@ -152,7 +156,6 @@ namespace LibraryTerminal
 
             }
         }
-
 
 
         public static int GetuserInput(List<Books> BookLists, string message)
