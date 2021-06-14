@@ -10,8 +10,7 @@ namespace LibraryTerminal
     {
         static void Main(string[] args)
         {
-            //C:\Users\tmviz\source\repos\LIbraryTerminal\LibraryTerminal\LibraryTerminal
-            //C:\Users\tmviz\source\repos\LIbraryTerminal\LibraryTerminal\LibraryTerminal\LibraryTerminal\bin\Debug\netcoreapp3.1\.exe
+
             string filePath = @"..\..\..\BooksList.txt";
             StreamReader reader = new StreamReader(filePath);
 
@@ -36,131 +35,137 @@ namespace LibraryTerminal
 
 
             bool goOn = true;
-                while (goOn == true)
-                {
-                    //Library object pulls
-                    LIbraryIO libraryIO = new LIbraryIO(bookList);
 
-                    //main menu
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("Welcome to Grand Circus Library \n");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("1) Display book list");
-                    Console.WriteLine("2) Search by Title"); //These function seperately, but it would be cool to add a third option to search all terms 
-                                                                       //options will be implimented later
-                    Console.WriteLine("3) Search by Author");
-                    
-                    Console.WriteLine("4) Add Book to the Library"); //exceptions need to be added and tested  
-                    Console.WriteLine("5) Book of the Day -- does not work, will impliment later");
-                    Console.WriteLine("6) Burn down the Library...? "); //functionality to be added in later
-                    Console.WriteLine("7) Checkout Book from Library"); //exceptions need to be added and tested
-                    //Console.WriteLine("8) Checkout Book from Library"); //excpetions need to be added and tested
-                    Console.WriteLine("9) Exit");
-                    Console.WriteLine();
-                    int input = int.Parse(GetuserInput("Please select and option"));
+            while (goOn == true)
+            {
+                //Library object pulls
+                LIbraryIO libraryIO = new LIbraryIO(BookList);
+
+                //main menu
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.WriteLine("Welcome to Grand Circus Library \n");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("1) Display book list");
+                Console.WriteLine("2) Search by Title"); //These function seperately, but it would be cool to add a third option to search all terms 
+                Console.WriteLine("3) Search by Author");
+                Console.WriteLine("4) Add Book to the Library"); //exceptions need to be added and tested  
+                Console.WriteLine("5) Book of the Day -- does not work, will impliment later");
+                Console.WriteLine("6) Burn down the Library...? "); //functionality to be added in later
+                Console.WriteLine("7) Exit");
+                Console.WriteLine();
+                int input = GetuserInput("Please select and option");
 
                 if (input == 1)
                 {
+                    //display book list txt file
                     libraryIO.PrintWholeList();
+                    //ask user to check out a book from the list
+                    //call checkout?
+
+                    /*
+                     * 
+                     *     
+                          Console.WriteLine("Select a book by index number");
+                    int bookselected = int.Parse(Console.ReadLine());
+                    libraryIO.CheckOut(libraryIO.BookList[bookselected - 1]);
+                     * 
+                     */
 
                 }
-                   else if (input == 2)
+
+                else if (input == 2)
+
                 {
+                    //ADD DATA VALIDATION!!
+                    //search list by title
+                    Console.WriteLine("Search by Title");
+                    string keyword = Console.ReadLine().ToLower().Trim();
+                    libraryIO.SearchbyTitle(keyword);
 
-                        Console.WriteLine("Search by Title");
-                        string keyword = Console.ReadLine();
-                        libraryIO.SearchbyTitle(keyword);
-
-                    //book of the day
-                    //get book at random from list and ask user to check it out
-
+                    //ask if they want to check out the book they have searched for
                 }
                 else if (input == 3)
                 {
+                    //ADD DATA VALIDATION!!
+                    //search list by author
+                    Console.WriteLine("Search by Author");
+                    string keyword = Console.ReadLine().ToLower().Trim();
+                    libraryIO.SearchbyAuthor(keyword);
 
-                        Console.WriteLine("Search by Author");
-                        string keyword = Console.ReadLine();
-                        libraryIO.SearchbyAuthor(keyword);
-
-                    //suggest a book
-                    //write to input/output file and display the list of suggested books
-
+                    //ask if they want to check out the book they have searched for
                 }
                 else if (input == 4)
-                    {
-                        libraryIO.AddBook();
-                    }
+                {
+                    //add book to list and txt file
+                    libraryIO.AddBook();
+                }
 
-                else if (input == 6)
+                else if (input == 5)
+
                 {
 
-                       
-
+                    //book of the day
+                    //get book at random
+                }
+                else if (input == 6)
+                {
                     //burndown library
                     BurnLibrary();
                     Console.Clear();
 
                 }
-                else if (input == 5)
+
+                else if (input == 7)
                 {
-
-                        //book of the day
-                        //get book at random
-                    }
-
-                    else if (input == 7)
-                    {
-                        Console.WriteLine("Select a book by index number");
-                        int bookselected = int.Parse(Console.ReadLine());
-                    libraryIO.CheckOut(libraryIO.BookList[bookselected-1]);
-                    }
-                    else if (input == 9)
-                    {
-                        goOn = GetContinue();
-                    }
-                    else
-                    {
-                        GetuserInput("Please select an option");
-                    }
+                    //ADD DATA VALIDATION!!
+                    //Exit program
+                    goOn = GetContinue();
                 }
+                else
+                {
+                    GetuserInput("Please select an option");
+                }
+
             }
+        }
+            
         
-        //public static void TitleOrAuthor(Library library)
-        //{
-        //    Console.ForegroundColor = ConsoleColor.Cyan;
-        //    Console.WriteLine("--Searching by Author or Title--");
-        //    Console.ForegroundColor = ConsoleColor.White;
-        //    Console.Write("Would you like to search by author or title: ");
+        public static void TitleOrAuthor(LIbraryIO library)
+        {
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine("--Searching by Author or Title--");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("Would you like to search by author or title: ");
 
-        //    string authortitle = Console.ReadLine().ToLower();
-        //    if (authortitle == "author")
-        //    {
-        //        //search by author
-        //        Console.WriteLine("Searching by Author");
-        //        string keyword = Console.ReadLine();
-        //        library.SearchbyAuthor(keyword);
+            string authortitle = Console.ReadLine().ToLower();
+            if (authortitle == "author")
+            {
+                //search by author
+                Console.WriteLine("Searching by Author");
+                string keyword = Console.ReadLine();
+                //LIbraryIO.SearchbyAuthor(keyword);
 
-        //        //add method here
-        //        //need to ask if they want to check this book out
-        //    }
-        //    else if (authortitle == "title")
-        //    {
-        //        //search by title
-        //        Console.WriteLine("Searching by Title");
-        //        string keyword = Console.ReadLine();
-        //        library.SearchbyTitle(keyword);
+                //add method here
+                //need to ask if they want to check this book out
+            }
+            else if (authortitle == "title")
+            {
+                //search by title
+                Console.WriteLine("Searching by Title");
+                string keyword = Console.ReadLine();
+                //library.SearchbyTitle(keyword);
 
-        //        //add method here
-        //        //need to ask if they want to check this book out
-        //    }
-        //    else
-        //    { 
-        //        Console.WriteLine("Invalid Input");
-        //        TitleOrAuthor(library);
-        //    }
+                //add method here
+                //need to ask if they want to check this book out
+            }
+            else
+            { 
+                Console.WriteLine("Invalid Input");
+                TitleOrAuthor(library);
+            }
 
-        //}
-       
+        }
+
 
         public static void PrintWholeList(List<Books> items)
         {
@@ -173,7 +178,7 @@ namespace LibraryTerminal
             }
         }
 
-        public static string GetuserInput(string message)
+        public static int GetuserInput(string message)
         {
             Console.Write(message + " ");
             string input = Console.ReadLine().ToLower().Trim();
@@ -182,27 +187,14 @@ namespace LibraryTerminal
                 int index = int.Parse(input);
                 if(index >= 0 && index <= 12)
                 {
-                    return index.ToString();
+                    return index;
                 }
             }
             catch (FormatException)
             {
                 return GetuserInput("Please select a valid option");
             }
-
-            if (input == "y" || input == "yes")
-            {
-                return input;
-            }
-            else if (input == "n" || input == "no")
-            {
-                return input;
-            }
-            else
-            {
-                return GetuserInput("Please select and option provided");
-            }
-
+            return GetuserInput("Please select a valid index");
 
         }
 
