@@ -128,11 +128,8 @@ namespace LibraryTerminal
         }
 
         //uses current day and sets that date to the book property DueDate and sets a return by time
-        public void CheckOut()
+        public void CheckOut(int index)
         {
-
-            int index = Program.GetuserInput("Select a book by index number");
-
             Books chosenbook = BookList[index - 1];
 
             if (chosenbook.Status == true)
