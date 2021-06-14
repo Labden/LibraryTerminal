@@ -104,13 +104,15 @@ namespace LibraryTerminal
 
 
             }
+
+        //prints out a list of books from the text file by index
         public void PrintWholeList()
         {
             Console.WriteLine();
-            for (int i = 0; i < this.BookList.Count; i++)
+            for (int i = 0; i < BookList.Count; i++)
             {
 
-                if (this.BookList[i].Status == true)
+                if (BookList[i].Status == true)
                 {
                     Console.WriteLine($"{i + 1}: {this.BookList[i].Title}, -- {this.BookList[i].Author}, On Shelf");
                     
@@ -121,6 +123,8 @@ namespace LibraryTerminal
             }
             Console.WriteLine();
         }
+
+        //uses current day and sets that date to the book property DueDate and sets a return by time
         public void CheckOut(Books b)
         {
             if (b.Status == true)
@@ -133,11 +137,24 @@ namespace LibraryTerminal
             }
             else
             {
-                Console.WriteLine($"I {b.Title}, by {b.Author} is currently checked out, its due back by the {b.DueDate}");
+                Console.WriteLine($"{b.Title}, by {b.Author} is currently checked out, its due back by the {b.DueDate}");
             }
 
 
         }
+
+
+
+        //this will search the book list for an author and check to see if that author is in the book list
+        public void SearchbyAuthor(List<Books> booklist, string keyword)
+        {
+            var byTitleAuthor = booklist.Where(Book => Book.Author.Contains(keyword) || Book.Title.Contains(keyword));
+            Console.WriteLine(byTitleAuthor);
+            foreach (Books book in byTitleAuthor)
+            {
+                Console.WriteLine(book.Title + book.Author);
+            }
+        }        
     }
-    }
+}
 
