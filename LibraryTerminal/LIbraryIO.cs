@@ -3,106 +3,105 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.IO;
-
 namespace LibraryTerminal
 {
     public class LIbraryIO
     {
 
-            public List<Books> BookList { get; set; }
+        public List<Books> BookList { get; set; }
 
-            public LIbraryIO(List<Books> BookList)
-            {
+        public LIbraryIO(List<Books> BookList)
+        {
 
 
             this.BookList = BookList;
 
 
+        }
+
+
+
+        public void SearchbyAuthor(string keyword)
+        {
+            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower()));
+
+            foreach (Books book in byAuthor)
+            {
+                Console.WriteLine($"{book.Title} -- {book.Author}");
             }
 
+        }
+
+        public void SearchbyTitle(string keyword)
+        {
 
 
-            public void SearchbyAuthor(string keyword)
+
+            var byTitle = this.BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()));
+
+
+            foreach (Books book in byTitle)
             {
-                var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower()));
-
-                foreach (Books book in byAuthor)
-                {
-                    Console.WriteLine($"{book.Title} -- {book.Author}");
-                }
-
+                Console.WriteLine($"{book.Title} + {book.Author}");
             }
 
-            public void SearchbyTitle(string keyword)
-            {
+        }
 
-
-
-                var byTitle = this.BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()));
-
-
-                foreach (Books book in byTitle)
-                {
-                    Console.WriteLine($"{book.Title} + {book.Author}");
-                }
-
-            }
-
-            public void AddBook()
-            {
-                string filePath = @"..\..\..\BooksList.txt";
+        public void AddBook()
+        {
+            string filePath = @"..\..\..\BooksList.txt";
 
             //no exception testing
-                Console.WriteLine("Please input the book's Title");
-                string booktitle = Console.ReadLine();
+            Console.WriteLine("Please input the book's Title");
+            string booktitle = Console.ReadLine();
 
-                Console.WriteLine("Please input the book's Author");
-                string bookauthor = Console.ReadLine();
+            Console.WriteLine("Please input the book's Author");
+            string bookauthor = Console.ReadLine();
 
-                Books b = new Books(booktitle, bookauthor, true, null);
+            Books b = new Books(booktitle, bookauthor, true, null);
 
-                this.BookList.Add(b);
+            this.BookList.Add(b);
 
-                string line = BooksToString(b);
-                Console.WriteLine(line);
+            string line = BooksToString(b);
+            Console.WriteLine(line);
 
-                StreamReader reader = new StreamReader(filePath);
-                string original = reader.ReadToEnd();
-                reader.Close();
+            StreamReader reader = new StreamReader(filePath);
+            string original = reader.ReadToEnd();
+            reader.Close();
 
-              
-                StreamWriter writer = new StreamWriter(filePath);
-                //Write override everything with the string
-                writer.Write(original+ line);
 
-                writer.Close();
-            }
+            StreamWriter writer = new StreamWriter(filePath);
+            //Write override everything with the string
+            writer.Write(original + line);
 
-            public static string BooksToString(Books b)
+            writer.Close();
+        }
+
+        public static string BooksToString(Books b)
+        {
+            string output = $"{b.Title}, {b.Author}, {b.Status},{b.DueDate} \n";
+            return output;
+        }
+
+        //This takes a string from our file and makes it into an object 
+        public static Books ConvertToBooks(string line)
+        {
+            string[] properties = line.Split(',');
+
+
+            if (properties.Length == 4)
             {
-                string output = $"{b.Title}, {b.Author}, {b.Status},{b.DueDate} \n";
-                return output;
+                bool bstatus = bool.Parse(properties[2]);
+                Books b = new Books(properties[0], properties[1], bstatus, properties[3]);
+                return b;
             }
-
-            //This takes a string from our file and makes it into an object 
-            public static Books ConvertToBooks(string line)
+            else
             {
-                string[] properties = line.Split(',');
-
-
-                if (properties.Length == 4)
-                {
-                    bool bstatus = bool.Parse(properties[2]);
-                    Books b = new Books(properties[0], properties[1], bstatus, properties[3]);
-                    return b;
-                }
-                else
-                {
-                    return null;
-                }
-
-
+                return null;
             }
+
+
+        }
 
         //prints out a list of books from the text file by index
         public void PrintWholeList()
@@ -118,7 +117,7 @@ namespace LibraryTerminal
                 if (BookList[i].Status == true)
                 {
                     Console.WriteLine($"{i + 1}: {this.BookList[i].Title}, -- {this.BookList[i].Author}, On Shelf");
-                    
+
                 }
                 else
                 { Console.WriteLine($"{i + 1}: {this.BookList[i].Title}, -- {this.BookList[i].Author} due back by {this.BookList[i].DueDate}"); }
@@ -165,11 +164,62 @@ namespace LibraryTerminal
                 writer.Write(newupdatedstatuslist);
 
                 writer.Close();
-                
+
             }
             else
             {
                 Console.WriteLine($"{chosenbook.Title}, by {chosenbook.Author} is currently checked out, its due back by the {chosenbook.DueDate}");
+            }
+
+
+        }
+
+        public void ReturnBook(int index)
+        {
+            Books chosenbook = BookList[index - 1];
+
+
+            
+            if (chosenbook.Status != true)
+            {
+                //sets the dueDate back to null
+                
+                chosenbook.DueDate = null;
+                Console.WriteLine($"You have returned {chosenbook.Title}, by {chosenbook.Author} Thank You!");
+
+                //this updates the bool to read as on shelf
+                chosenbook.Status = true;
+
+                //takes updated chosenbook and turns it to a string.
+                string newline = LIbraryIO.BooksToString(chosenbook);
+
+                //Repulls the whole list from the text file into program
+
+                string filePath = @"..\..\..\BooksList.txt";
+                StreamReader reader = new StreamReader(filePath);
+
+                string output = reader.ReadToEnd();
+
+                string[] lines = output.Split('\n');
+
+                reader.Close();
+
+                //This sets the location of the chosen array to be equal to the new status converted string
+                lines[index - 1] = newline;
+
+                string newupdatedstatuslist = string.Join("\n", lines);
+
+
+                StreamWriter writer = new StreamWriter(filePath);
+                //Write override everything with the string
+                writer.Write(newupdatedstatuslist);
+
+                writer.Close();
+
+            }
+            else
+            {
+                Console.WriteLine($"{chosenbook.Title}, by {chosenbook.Author} is currently on file and doesn't need to be returned");
             }
 
 
@@ -186,7 +236,6 @@ namespace LibraryTerminal
             {
                 Console.WriteLine(book.Title + book.Author);
             }
-        }        
+        }
     }
 }
-
