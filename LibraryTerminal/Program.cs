@@ -45,7 +45,7 @@ namespace LibraryTerminal
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine("Welcome to Grand Circus Library \n");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("1) Display book list");
+                Console.WriteLine("1) Display book list"); // complete
                 Console.WriteLine("2) Search by Title");
                 Console.WriteLine("3) Search by Author");
                 Console.WriteLine("4) Add Book to the Library"); //exceptions need to be added and tested  
@@ -102,19 +102,47 @@ namespace LibraryTerminal
 
                 {
 
-                    Console.WriteLine("Search by Title");
-                    string keyword = Console.ReadLine().ToLower().Trim();
-                    libraryIO.SearchbyTitle(keyword);
+                    bool optionTwo = true;
+                    while (optionTwo == true)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("--Search by Title--");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("Please enter a book title you want to search for.");
 
-                    //ask if they want to check out the book they have searched for
+                        string keyword = Console.ReadLine().ToLower().Trim();
+                        libraryIO.SearchbyTitle(keyword);
+                        Console.ReadLine();
+                        optionTwo = false;
+
+                        /*
+                        Console.WriteLine("Would you like to check out this selected book? (y/n)");
+                        string userAnswer = Console.ReadLine().ToLower().Trim();
+                        if (userAnswer == "y" || userAnswer == "yes")
+                        {
+                            libraryIO.CheckOut();
+                            Console.WriteLine("Thank you, enjoy your book");
+                            optionTwo = false;
+                            Console.ReadLine();
+                            Console.Clear();
+                        }
+                        */
+                    }
+
+
                 }
                 else if (input == 3)
                 {
-                    //ADD DATA VALIDATION!!
-                    //search list by author
-                    Console.WriteLine("Search by Author");
+                    Console.Clear();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("--Search by Author--");
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.WriteLine("Please eneter a book author you want to search for.");
+                    
                     string keyword = Console.ReadLine().ToLower().Trim();
                     libraryIO.SearchbyAuthor(keyword);
+                    Console.ReadLine();
 
                     //ask if they want to check out the book they have searched for
                 }
