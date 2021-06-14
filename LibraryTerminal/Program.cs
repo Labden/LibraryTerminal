@@ -57,6 +57,7 @@ namespace LibraryTerminal
 
                 if (input == 1)
                 {
+
                     bool optionOne = true;
                     while (optionOne == true)
                     {
@@ -93,6 +94,7 @@ namespace LibraryTerminal
                             optionOne = false;
                         }
                     }
+
                 }
 
                 else if (input == 2)
@@ -138,8 +140,7 @@ namespace LibraryTerminal
 
                 else if (input == 7)
                 {
-                    //ADD DATA VALIDATION!!
-                    //Exit program
+
                     goOn = GetContinue();
                 }
                 else
@@ -158,16 +159,20 @@ namespace LibraryTerminal
             try 
             {
                 int index = int.Parse(input);
+
                 if(index >= 1 && index <= BookLists.Count)
+
                 {
                     return index;
                 }
             }
             catch (FormatException)
             {
+
                 return GetuserInput(BookLists, "Please select a valid option");
             }
             return GetuserInput(BookLists, "Please select a valid index");
+
 
         }
 
@@ -226,7 +231,7 @@ namespace LibraryTerminal
                     Console.WriteLine("BURNING BOOKS");
                 }
                 Console.WriteLine("Burning Complete...");
-                Console.ReadLine();
+                Console.ReadLine().ToLower().Trim();
                 Console.Clear();
             }
             else if(input == "n" || input == "no")
