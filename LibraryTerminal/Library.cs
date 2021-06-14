@@ -42,25 +42,5 @@ namespace LibraryTerminal
                 }
             }
         }
-
-        public void SearchbyAuthor( string keyword)
-        {
-            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower()));
-
-            foreach (Books book in byAuthor)
-            {
-                Console.WriteLine($"{book.Title} -- {book.Author}");
-            }
-        }
-
-        public void SearchbyTitle(string keyword)
-        {
-            var byTitle = this.BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower()) );
-
-            foreach (Books book in byTitle)
-            {
-                Console.WriteLine($"{book.Title} + {book.Author}");
-            }
-        }
     }
 }
