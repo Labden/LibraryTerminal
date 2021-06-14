@@ -1,5 +1,4 @@
-"Game of Thrones", "George R.R Martin", False,6/28/2021 2:16:02 PM 
-
+"Game of Thrones","George R.R Martin", true, null
 "On the road", "Jack Kerouac", true, null
 "Green eggs an ham", "Dr.Seuess", true, null
 "The Art of War", "Sun Tzu", true, null
