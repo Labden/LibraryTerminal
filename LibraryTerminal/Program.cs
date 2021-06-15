@@ -64,7 +64,7 @@ namespace LibraryTerminal
                     {
                         //display book list txt file
                         libraryIO.PrintWholeList();
-                        Console.Write("Would you like to check out a book from this this? (y/n): ");
+                        Console.Write("Would you like to check out a book from this list? (y/n): ");
                         string userAnswer = Console.ReadLine().ToLower().Trim();
                         if (userAnswer == "y" || userAnswer == "yes")
                         {
@@ -72,7 +72,7 @@ namespace LibraryTerminal
                             try
                             {
                                 int bookselected = int.Parse(Console.ReadLine());
-                                libraryIO.CheckOut(bookselected);
+                                libraryIO.CheckOut(bookselected,BookList);
                                 Console.WriteLine("Thank you, enjoy your book");
                                 menuOption = false;
                                 Console.ReadLine();
@@ -111,7 +111,10 @@ namespace LibraryTerminal
 
                         string keyword = Console.ReadLine().ToLower().Trim();
                         Console.WriteLine("These books match your search results:");
-                        libraryIO.SearchbyTitle(keyword);
+
+                        List<Books> searchresultstitle = new List<Books>();
+
+                        searchresultstitle=libraryIO.SearchbyTitle(keyword);
 
                         Console.WriteLine("Would you like to check out any books from this list? (y/n)");
                         string userAnswer = Console.ReadLine().ToLower().Trim();
@@ -122,7 +125,7 @@ namespace LibraryTerminal
                             {
                                 int index = int.Parse(Console.ReadLine());
 
-                                libraryIO.CheckOut(index);
+                                libraryIO.CheckOut(index, searchresultstitle);
                                 Console.WriteLine("Thank you, enjoy your book");
                                 menuOption = false;
                                 Console.ReadLine();
@@ -156,7 +159,10 @@ namespace LibraryTerminal
                         Console.WriteLine("Please enter a key word you want to search for:");
 
                         string keyword = Console.ReadLine().ToLower().Trim();
-                        libraryIO.SearchbyTitle(keyword);
+
+                        List<Books> searchresults = new List<Books>();
+                        
+                        searchresults=(libraryIO.SearchbyAuthor(keyword));
 
                         Console.WriteLine("Would you like to check out any books from this list? (y/n)");
                         string userAnswer = Console.ReadLine().ToLower().Trim();
@@ -167,7 +173,7 @@ namespace LibraryTerminal
                             {
                                 int index = int.Parse(Console.ReadLine());
 
-                                libraryIO.CheckOut(index);
+                                libraryIO.CheckOut(index, searchresults);
                                 Console.WriteLine("Thank you, enjoy your book");
                                 menuOption = false;
                                 Console.ReadLine();
@@ -246,18 +252,41 @@ namespace LibraryTerminal
                     }
                 }
                 //call bookoftheday to get a random book
+                
                 else if (input == 6)
                 {
-                    Console.Clear();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("--Book of the day!--");
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine("The book of the day is: \n");
-                    Books bookOfTheDay = BookOfTheDay(BookList);
-                    Console.WriteLine($"{bookOfTheDay.Title} by {bookOfTheDay.Author}");
-                    Console.ReadLine();
-                    Console.Clear();
+                    bool goOn6 = true;
+                    while (goOn6==true)
+                    {
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("--Book of the day!--");
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine("The book of the day is: \n");
+                        List<Books> bookOfTheDay = BookOfTheDay(BookList);
+                        for (int i = 0; i < bookOfTheDay.Count; i++)
+                        {
+                            Console.WriteLine($"{bookOfTheDay[i].Title} by {bookOfTheDay[i].Author}");
+                        }
 
+                        Console.WriteLine("Would you like to check out this book?");
+
+                        string randresponse = Console.ReadLine().ToLower();
+
+                        if (randresponse == "y" || randresponse == "yes")
+                        {
+                            libraryIO.CheckOut(1,bookOfTheDay);
+                            goOn6 = false;
+                        }
+                        else
+                        {
+                            Console.WriteLine("");
+                        }
+
+
+                        Console.ReadLine();
+                        Console.Clear();
+                    }
                     //ADD -- ask user if they want to check this book out
 
                 }
@@ -376,16 +405,20 @@ namespace LibraryTerminal
                 BurnLibrary();
             }
         }
-        public static Books BookOfTheDay(List<Books> Book)
+        public static List<Books> BookOfTheDay(List<Books> Book)
         {
             Random random = new Random();
-
+           
             int randomBook = random.Next(1, Book.Count + 1);
+
+            List<Books> randlist = new List<Books>();
+
             for (int i = 1; i < Book.Count; i++)
             {
                 if (randomBook == i)
                 {
-                    return Book[i];
+                    randlist.Add(Book[i]);
+                    return randlist;
                 }
             }
             return null;
