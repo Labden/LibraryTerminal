@@ -1,15 +1,13 @@
-"The little engine that could",  "Watty Piper", False,6/29/2021 10:40:12 AM 
-
-
-"C#: Beginners guide to OOP",  "Grand Circus", False,6/29/2021 10:35:42 AM 
-
-
-"The little engine that could",  "Watty Piper", False,6/28/2021 4:18:04 PM 
+"Game of Thrones", "George R.R Martin", true, null
+"On the road", "Jack Kerouac", true, null
+"Green eggs and ham",  "Dr.Seuess", true, null 
+"Art of War", "Sun Tzu", true, null
 "C#: Beginners guide to OOP", "Grand Circus", true, null
-"The little engine that could", "Watty Piper", true, null
+"The little engine that could",  "Watty Piper", true, null
 "Harry Potter", "J.K Rowling", true, null
 "JavaScript 101", "Grand Circus", true, null
+"Soft Skills", "Grand Circus, true, null
 "Marcus Aurelius: Meditations", "Penguin Classics", true, null
-
+"Clean Code", "Robert Cecil Martin", true, null
 "Where the sidewalk ends", "Shel Silversteins", true, null
-"Alice in Wonderland", "Charles Dodgson", true, null
+"Alice in Wonderland",  "Charles Dodgson", true, null 
