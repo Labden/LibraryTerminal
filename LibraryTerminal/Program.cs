@@ -132,10 +132,15 @@ namespace LibraryTerminal
                                 Console.Clear();
 
                             }
+                            catch (ArgumentOutOfRangeException)
+                            {
+                                Console.WriteLine("Please select a vaild index");
+                            }
                             catch (FormatException)
                             {
                                 Console.WriteLine("Please select a vaild index");
                             }
+
                         }
                         else if(userAnswer == "n" || userAnswer == "no")
                         {
@@ -181,6 +186,10 @@ namespace LibraryTerminal
 
                             }
                             catch (FormatException)
+                            {
+                                Console.WriteLine("Please select a vaild index");
+                            }
+                            catch (ArgumentOutOfRangeException)
                             {
                                 Console.WriteLine("Please select a vaild index");
                             }
@@ -269,7 +278,7 @@ namespace LibraryTerminal
                             Console.WriteLine($"{bookOfTheDay[i].Title} by {bookOfTheDay[i].Author}");
                         }
 
-                        Console.WriteLine("Would you like to check out this book?");
+                        Console.WriteLine("Would you like to check out this book? (y/n)");
 
                         string randresponse = Console.ReadLine().ToLower();
 
@@ -278,10 +287,12 @@ namespace LibraryTerminal
                             libraryIO.CheckOut(1,bookOfTheDay,BookList);
                             goOn6 = false;
                         }
-                        else
+                        else if(randresponse == "n" || randresponse == "no")
                         {
-                            Console.WriteLine("");
+                            Console.WriteLine("Moving back to main menu");
+                            goOn6 = false;
                         }
+
 
 
                         Console.ReadLine();
