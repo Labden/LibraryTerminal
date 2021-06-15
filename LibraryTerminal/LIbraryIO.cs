@@ -12,15 +12,8 @@ namespace LibraryTerminal
 
         public LIbraryIO(List<Books> BookList)
         {
-
-
             this.BookList = BookList;
-
-
         }
-
-
-
 
         public void SearchbyAuthor(string keyword)
         {
@@ -28,26 +21,20 @@ namespace LibraryTerminal
 
             for(int i = 0; i < byAuthor.Count; i++)
             {
-                Console.WriteLine($"{i}: {byAuthor[i].Title} by {byAuthor[i].Author}");
+                Console.WriteLine($"{i + 1}: {byAuthor[i].Title} by {byAuthor[i].Author}");
             }
         }
 
-
-
-            public void SearchbyTitle(string keyword)
+        public void SearchbyTitle(string keyword)
+        {
+            var byTitle = BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower())).ToList();
+            for(int i = 0; i < byTitle.Count; i++)
             {
-                var byTitle = BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower())).ToList();
-
-                for(int i = 0; i < byTitle.Count; i++)
-                {
-                    Console.WriteLine($"{i}: {byTitle[i].Title} by {byTitle[i].Author}");
-
-                }
-
+                Console.WriteLine($"{i + 1}: {byTitle[i].Title} by {byTitle[i].Author}");
             }
+        }
 
-        
-
+        //Add a book to the txt file and list of books
         public void AddBook()
         {
             string filePath = @"..\..\..\BooksList.txt";
@@ -78,6 +65,7 @@ namespace LibraryTerminal
             writer.Close();
         }
 
+        //convert book object to string
         public static string BooksToString(Books b)
         {
             string output = $"{b.Title}, {b.Author}, {b.Status},{b.DueDate} \n";
@@ -117,11 +105,11 @@ namespace LibraryTerminal
 
                 if (BookList[i].Status == true)
                 {
-                    Console.WriteLine($"{i + 1}: {this.BookList[i].Title}, -- {this.BookList[i].Author}, On Shelf");
+                    Console.WriteLine($"{i + 1}: {BookList[i].Title}, by {BookList[i].Author}, On Shelf");
 
                 }
                 else
-                { Console.WriteLine($"{i + 1}: {this.BookList[i].Title}, -- {this.BookList[i].Author} due back by {this.BookList[i].DueDate}"); }
+                { Console.WriteLine($"{i + 1}: {BookList[i].Title}, by {BookList[i].Author} due back by {BookList[i].DueDate}"); }
 
             }
             Console.WriteLine();
