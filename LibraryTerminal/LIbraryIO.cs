@@ -140,12 +140,74 @@ namespace LibraryTerminal
 
                 string output = reader.ReadToEnd();
 
+                //full list of books as string lines
                 string[] lines = output.Split('\n');
 
                 reader.Close();
 
                 //This sets the location of the chosen array to be equal to the new status converted string
                 lines[index - 1] = newline;
+
+                string newupdatedstatuslist = string.Join("\n", lines);
+
+
+                StreamWriter writer = new StreamWriter(filePath);
+                //Write override everything with the string
+                writer.Write(newupdatedstatuslist);
+
+                writer.Close();
+
+            }
+            else
+            {
+                Console.WriteLine($"{chosenbook.Title}, by {chosenbook.Author} is currently checked out, its due back by the {chosenbook.DueDate}");
+            }
+
+
+
+        }
+
+        public void CheckOut(int index, List<Books> BookList, List<Books> OGList)
+        {
+            Books chosenbook = BookList[index - 1];
+
+            if (chosenbook.Status == true)
+            {
+                //sets the dueDate 14 days ahead from the current system time
+
+                int chosenbookogindex=-1;
+
+                for (int i = 0; i < OGList.Count; i++)
+                {
+                    if (chosenbook.Title==OGList[i].Title&& chosenbook.Author == OGList[i].Author)
+                    {
+                        chosenbookogindex = i;
+                    }
+                }
+
+                DateTime dueDate = DateTime.Now.AddDays(14);
+                chosenbook.DueDate = chosenbook.DateToString(dueDate);
+                Console.WriteLine($"You have checked out {chosenbook.Title}, by {chosenbook.Author} Please bring it back by {dueDate}");
+                
+                chosenbook.Status = false;
+
+                //takes updated b and turns it to a string.
+                string newline = LIbraryIO.BooksToString(chosenbook);
+
+                //Repulls the whole list from the text file into program
+
+                string filePath = @"..\..\..\BooksList.txt";
+                StreamReader reader = new StreamReader(filePath);
+
+                string output = reader.ReadToEnd();
+
+                //full list of books as string lines
+                string[] lines = output.Split('\n');
+
+                reader.Close();
+
+                //This sets the location of the chosen array to be equal to the new status converted string
+                lines[chosenbookogindex - 1] = newline;
 
                 string newupdatedstatuslist = string.Join("\n", lines);
 

@@ -125,7 +125,7 @@ namespace LibraryTerminal
                             {
                                 int index = int.Parse(Console.ReadLine());
 
-                                libraryIO.CheckOut(index, searchresultstitle);
+                                libraryIO.CheckOut(index, searchresultstitle,BookList);
                                 Console.WriteLine("Thank you, enjoy your book");
                                 menuOption = false;
                                 Console.ReadLine();
@@ -173,7 +173,7 @@ namespace LibraryTerminal
                             {
                                 int index = int.Parse(Console.ReadLine());
 
-                                libraryIO.CheckOut(index, searchresults);
+                                libraryIO.CheckOut(index, searchresults,BookList);
                                 Console.WriteLine("Thank you, enjoy your book");
                                 menuOption = false;
                                 Console.ReadLine();
@@ -275,7 +275,7 @@ namespace LibraryTerminal
 
                         if (randresponse == "y" || randresponse == "yes")
                         {
-                            libraryIO.CheckOut(1,bookOfTheDay);
+                            libraryIO.CheckOut(1,bookOfTheDay,BookList);
                             goOn6 = false;
                         }
                         else
