@@ -15,7 +15,7 @@ namespace LibraryTerminal
             this.BookList = BookList;
         }
 
-        public void SearchbyAuthor(string keyword)
+        public List<Books> SearchbyAuthor(string keyword)
         {
             var byAuthor = BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower())).ToList(); ;
 
@@ -23,15 +23,17 @@ namespace LibraryTerminal
             {
                 Console.WriteLine($"{i + 1}: {byAuthor[i].Title} by {byAuthor[i].Author}");
             }
+            return byAuthor;
         }
 
-        public void SearchbyTitle(string keyword)
+        public List<Books> SearchbyTitle(string keyword)
         {
             var byTitle = BookList.Where(Book => Book.Title.ToLower().Contains(keyword.ToLower())).ToList();
             for(int i = 0; i < byTitle.Count; i++)
             {
                 Console.WriteLine($"{i + 1}: {byTitle[i].Title} by {byTitle[i].Author}");
             }
+            return byTitle;
         }
 
         //Add a book to the txt file and list of books
@@ -116,7 +118,7 @@ namespace LibraryTerminal
         }
 
         //uses current day and sets that date to the book property DueDate and sets a return by time
-        public void CheckOut(int index)
+        public void CheckOut(int index, List<Books> BookList)
         {
             Books chosenbook = BookList[index - 1];
 
