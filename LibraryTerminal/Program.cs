@@ -12,12 +12,15 @@ namespace LibraryTerminal
         {
             //load BooksList.txt file 
             string filePath = @"..\..\..\BooksList.txt";
+            //open and read the txt file
             StreamReader reader = new StreamReader(filePath);
 
+            //read file to the end 
             string output = reader.ReadToEnd();
-
+            //split at the end of eveny line and store that line in string array
             string[] lines = output.Split('\n');
 
+            //create a new list to store book objects
             List<Books> BookList = new List<Books>();
 
             reader.Close();
@@ -32,13 +35,10 @@ namespace LibraryTerminal
                 }
             }
 
-
-
             bool goOn = true;
-
             while (goOn == true)
             {
-                //Library object pulls
+                //LibraryIO creates an instance of an object to reference and hold whole book list
                 LIbraryIO libraryIO = new LIbraryIO(BookList);
 
                 //main menu
@@ -46,14 +46,14 @@ namespace LibraryTerminal
                 Console.WriteLine("Welcome to Grand Circus Library");
                 Console.WriteLine("--Main Menu--\n");
                 Console.ForegroundColor = ConsoleColor.White;
-                Console.WriteLine("1) Display book list"); // complete
-                Console.WriteLine("2) Search by Title");
-                Console.WriteLine("3) Search by Author");
-                Console.WriteLine("4) Add Book to the Library"); //exceptions need to be added and tested  
+                Console.WriteLine("1) Display book list"); // show whole book list with up to date information
+                Console.WriteLine("2) Search by Title");  //search list by title / key word
+                Console.WriteLine("3) Search by Author"); //search list by author / key word
+                Console.WriteLine("4) Add Book to the Library"); // ask user to add a new book to the list
                 Console.WriteLine("5) Return Book"); // will call return book funtion
-                Console.WriteLine("6) Book of the Day"); //does not work, functionality to be added later
-                Console.WriteLine("7) Burn down the Library...? "); //functionality to be added in later
-                Console.WriteLine("8) Exit");
+                Console.WriteLine("6) Book of the Day"); //get random book from list and ask user to check it out
+                Console.WriteLine("7) Burn down the Library...? "); //Pull a Julius Caesar
+                Console.WriteLine("8) Exit"); //close program
                 Console.WriteLine();
                 int input = GetuserInput(BookList, "Please select an option");
 
