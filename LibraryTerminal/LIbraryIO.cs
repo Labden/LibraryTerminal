@@ -17,7 +17,7 @@ namespace LibraryTerminal
 
         public void SearchbyAuthor(string keyword)
         {
-            var byAuthor = this.BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower())).ToList(); ;
+            var byAuthor = BookList.Where(Book => Book.Author.ToLower().Contains(keyword.ToLower())).ToList(); ;
 
             for(int i = 0; i < byAuthor.Count; i++)
             {

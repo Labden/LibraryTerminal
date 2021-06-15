@@ -110,6 +110,7 @@ namespace LibraryTerminal
                         Console.WriteLine("Please enter a key word you want to search for:");
 
                         string keyword = Console.ReadLine().ToLower().Trim();
+                        Console.WriteLine("These books match your search results:");
                         libraryIO.SearchbyTitle(keyword);
 
                         Console.WriteLine("Would you like to check out any books from this list? (y/n)");
